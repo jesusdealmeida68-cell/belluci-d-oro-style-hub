@@ -33,30 +33,14 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const [searchOpen, setSearchOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="fixed inset-x-0 top-0 z-40 border-b border-on-image/20 bg-primary/20 text-on-image backdrop-blur-sm">
         <div className="grid h-16 grid-cols-[1fr_auto_1fr] items-center px-4 md:h-20 md:px-9">
           <div className="flex items-center gap-1 md:gap-3">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-on-image hover:bg-on-image/10 hover:text-on-image" aria-label="Abrir menu"><Menu /></Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-full border-border bg-background p-8 sm:max-w-lg">
-                <SheetHeader className="border-b border-border pb-8 text-left">
-                  <SheetTitle className="font-display text-3xl font-medium">BELLUCI D'ORO</SheetTitle>
-                  <SheetDescription>Milano · Dal 1987</SheetDescription>
-                </SheetHeader>
-                <nav className="mt-12 flex flex-col gap-6" aria-label="Menu principal">
-                  {["Novidades", "Feminino", "Masculino", "Bolsas", "Sapatos", "Joalharia", "A Maison"].map((item, index) => (
-                    <a key={item} href="#colecoes" className="group flex items-baseline justify-between border-b border-border/60 pb-3 font-display text-3xl transition-colors hover:text-gold">
-                      {item}<span className="font-sans text-xs text-muted-foreground">0{index + 1}</span>
-                    </a>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
+            <Button onClick={() => setMenuOpen(true)} variant="ghost" size="icon" className="text-on-image hover:bg-on-image/10 hover:text-on-image" aria-label="Abrir menu"><Menu /></Button>
             <span className="hidden text-xs font-medium uppercase md:inline">Menu</span>
             <Button onClick={() => setSearchOpen((value) => !value)} variant="ghost" size="icon" className="text-on-image hover:bg-on-image/10 hover:text-on-image" aria-label="Pesquisar"><Search /></Button>
             <span className="hidden text-xs font-medium uppercase md:inline">Pesquisar</span>
@@ -96,6 +80,26 @@ function Index() {
           </div>
         )}
       </header>
+
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 flex" role="dialog" aria-modal="true" aria-label="Menu principal">
+          <div className="absolute inset-0 bg-primary/75" onClick={() => setMenuOpen(false)} aria-hidden="true" />
+          <div className="quiet-reveal relative h-full w-full overflow-y-auto bg-background p-8 text-foreground shadow-2xl sm:max-w-lg">
+            <Button onClick={() => setMenuOpen(false)} variant="ghost" size="icon" className="absolute right-6 top-6" aria-label="Fechar menu"><X /></Button>
+            <div className="border-b border-border pb-8">
+              <p className="font-display text-3xl font-medium">BELLUCI D'ORO</p>
+              <p className="mt-2 text-sm text-muted-foreground">Milano · Dal 1987</p>
+            </div>
+            <nav className="mt-12 flex flex-col gap-6">
+              {["Novidades", "Feminino", "Masculino", "Bolsas", "Sapatos", "Joalharia", "A Maison"].map((item, index) => (
+                <a key={item} href="#colecoes" onClick={() => setMenuOpen(false)} className="group flex items-baseline justify-between border-b border-border/60 pb-3 font-display text-3xl transition-colors hover:text-gold">
+                  {item}<span className="font-sans text-xs text-muted-foreground">0{index + 1}</span>
+                </a>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
 
       <main>
         <section id="inicio" className="relative min-h-[92svh] overflow-hidden bg-primary">
