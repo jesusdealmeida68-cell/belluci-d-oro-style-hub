@@ -159,14 +159,17 @@ function Index() {
           </div>
           <div className="absolute bottom-7 left-6 z-10 flex gap-2 md:bottom-10 md:left-12" aria-label={`Destaque ${bannerSlide + 1} de ${bannerSlides.length}`}>
             {bannerSlides.map((slide, index) => (
-              <button
+              <Button
                 key={slide.title}
-                type="button"
+                variant="ghost"
+                size="icon"
                 onClick={() => setBannerSlide(index)}
-                className={`h-px transition-all duration-300 ${index === bannerSlide ? "w-10 bg-on-image" : "w-5 bg-on-image/50"}`}
+                className="h-6 w-auto p-0 hover:bg-transparent"
                 aria-label={`Mostrar ${slide.title}`}
                 aria-current={index === bannerSlide ? "true" : undefined}
-              />
+              >
+                <span className={`block h-px transition-all duration-300 ${index === bannerSlide ? "w-10 bg-on-image" : "w-5 bg-on-image/50"}`} />
+              </Button>
             ))}
           </div>
         </section>
