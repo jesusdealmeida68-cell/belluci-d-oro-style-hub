@@ -58,38 +58,40 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="fixed inset-x-0 top-0 z-40 border-b border-on-image/20 bg-primary/20 text-on-image backdrop-blur-sm">
-        <div className="grid h-16 grid-cols-[1fr_auto_1fr] items-center px-4 md:h-20 md:px-9">
-          <div className="flex items-center gap-1 md:gap-3">
-            <Button onClick={() => setMenuOpen(true)} variant="ghost" size="icon" className="text-on-image hover:bg-on-image/10 hover:text-on-image" aria-label="Abrir menu"><Menu /></Button>
-            <span className="hidden text-xs font-medium uppercase md:inline">Menu</span>
-            <Button onClick={() => setSearchOpen((value) => !value)} variant="ghost" size="icon" className="text-on-image hover:bg-on-image/10 hover:text-on-image" aria-label="Pesquisar"><Search /></Button>
-            <span className="hidden text-xs font-medium uppercase md:inline">Pesquisar</span>
-          </div>
-
-          <a href="#inicio" className="flex items-center justify-center" aria-label="BELLUCI D'ORO, início">
-            <img src={logoLight} alt="BELLUCI D'ORO" className="h-8 w-auto object-contain md:h-11" />
+        <div className="flex h-16 items-center justify-between px-4 md:h-20 md:px-9">
+          <a href="#inicio" className="flex items-center" aria-label="BELLUCI D'ORO, início">
+            <img src={logoLight} alt="BELLUCI D'ORO" className="h-10 w-auto object-contain md:h-14" />
           </a>
 
-          <div className="flex justify-end gap-1 md:gap-2">
-            <Button variant="ghost" size="icon" className="hidden text-on-image hover:bg-on-image/10 hover:text-on-image sm:inline-flex" aria-label="Favoritos"><Heart /></Button>
-            <Button variant="ghost" size="icon" className="hidden text-on-image hover:bg-on-image/10 hover:text-on-image sm:inline-flex" aria-label="Minha conta"><UserRound /></Button>
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-on-image hover:bg-on-image/10 hover:text-on-image" aria-label="Abrir sacola"><ShoppingBag /></Button>
-              </SheetTrigger>
-              <SheetContent className="border-border bg-background p-8 sm:max-w-md">
-                <SheetHeader className="text-left">
-                  <SheetTitle className="font-display text-3xl font-medium">A sua sacola</SheetTitle>
-                  <SheetDescription>As suas escolhas serão guardadas aqui.</SheetDescription>
-                </SheetHeader>
-                <div className="flex h-2/3 flex-col items-center justify-center text-center">
-                  <ShoppingBag className="mb-6 size-9 stroke-1 text-gold" />
-                  <p className="font-display text-2xl">A sacola está vazia</p>
-                  <p className="mt-2 max-w-xs text-sm text-muted-foreground">Explore as criações mais recentes da Maison.</p>
-                  <Button asChild className="mt-8 rounded-none px-8"><a href="#colecoes">Descobrir coleções</a></Button>
-                </div>
-              </SheetContent>
-            </Sheet>
+          <div className="flex items-center gap-3 md:gap-5">
+            <div className="flex items-center gap-1 md:gap-3">
+              <Button onClick={() => setMenuOpen(true)} variant="ghost" size="icon" className="text-on-image hover:bg-on-image/10 hover:text-on-image" aria-label="Abrir menu"><Menu /></Button>
+              <span className="hidden text-xs font-medium uppercase md:inline">Menu</span>
+              <Button onClick={() => setSearchOpen((value) => !value)} variant="ghost" size="icon" className="text-on-image hover:bg-on-image/10 hover:text-on-image" aria-label="Pesquisar"><Search /></Button>
+              <span className="hidden text-xs font-medium uppercase md:inline">Pesquisar</span>
+            </div>
+
+            <div className="flex items-center gap-1 md:gap-2">
+              <Button variant="ghost" size="icon" className="hidden text-on-image hover:bg-on-image/10 hover:text-on-image sm:inline-flex" aria-label="Favoritos"><Heart /></Button>
+              <Button variant="ghost" size="icon" className="hidden text-on-image hover:bg-on-image/10 hover:text-on-image sm:inline-flex" aria-label="Minha conta"><UserRound /></Button>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="text-on-image hover:bg-on-image/10 hover:text-on-image" aria-label="Abrir sacola"><ShoppingBag /></Button>
+                </SheetTrigger>
+                <SheetContent className="border-border bg-background p-8 sm:max-w-md">
+                  <SheetHeader className="text-left">
+                    <SheetTitle className="font-display text-3xl font-medium">A sua sacola</SheetTitle>
+                    <SheetDescription>As suas escolhas serão guardadas aqui.</SheetDescription>
+                  </SheetHeader>
+                  <div className="flex h-2/3 flex-col items-center justify-center text-center">
+                    <ShoppingBag className="mb-6 size-9 stroke-1 text-gold" />
+                    <p className="font-display text-2xl">A sacola está vazia</p>
+                    <p className="mt-2 max-w-xs text-sm text-muted-foreground">Explore as criações mais recentes da Maison.</p>
+                    <Button asChild className="mt-8 rounded-none px-8"><a href="#colecoes">Descobrir coleções</a></Button>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
         {searchOpen && (
