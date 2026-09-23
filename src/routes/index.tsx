@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Heart, Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
-import { useState } from "react";
+import { ChevronLeft, ChevronRight, Heart, Menu, Search, ShoppingBag, UserRound, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import heroImage from "@/assets/belluci-hero.jpg";
 import bagImage from "@/assets/belluci-bags.jpg";
@@ -34,6 +34,24 @@ export const Route = createFileRoute("/")({
 function Index() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [bannerSlide, setBannerSlide] = useState(0);
+
+  const bannerSlides = [
+    { image: bagImage, alt: "Bolsa Bellissima em pele preta", eyebrow: "Ícone da Maison", title: "Bellissima", copy: "Linhas precisas, pele macia e ferragens douradas.", position: "object-center" },
+    { image: menImage, alt: "Homem com alfaiataria preta da coleção La Notte", eyebrow: "Nova alfaiataria", title: "La Notte", copy: "A elegância italiana desenhada para depois do pôr do sol.", position: "object-[center_28%]" },
+    { image: objectsImage, alt: "Sapatos, perfume e joia dourada BELLUCI D'ORO", eyebrow: "A arte do detalhe", title: "Objetos de desejo", copy: "Pequenos gestos, feitos para permanecer.", position: "object-center" },
+  ];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setBannerSlide((current) => (current + 1) % bannerSlides.length);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [bannerSlides.length]);
+
+  const showPreviousBanner = () => setBannerSlide((current) => (current - 1 + bannerSlides.length) % bannerSlides.length);
+  const showNextBanner = () => setBannerSlide((current) => (current + 1) % bannerSlides.length);
+  const activeBanner = bannerSlides[bannerSlide];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -112,6 +130,44 @@ function Index() {
               <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-on-image/90 md:text-base">Uma coleção moldada pela luz italiana, onde a precisão encontra a leveza.</p>
               <a href="#colecoes" className="mt-7 inline-block border-b border-on-image pb-1 text-xs font-semibold uppercase transition-opacity hover:opacity-70">Descobrir a coleção</a>
             </div>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-primary" aria-label="Destaques da BELLUCI D'ORO" aria-roledescription="carrossel">
+          <div key={bannerSlide} className="banner-slide-in relative h-[68svh] min-h-[500px] md:h-[76svh]">
+            <img
+              src={activeBanner.image}
+              alt={activeBanner.alt}
+              width={1536}
+              height={1280}
+              className={`absolute inset-0 h-full w-full object-cover ${activeBanner.position}`}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/80 via-primary/30 to-transparent md:via-primary/10" />
+            <div className="relative mx-auto flex h-full max-w-7xl items-end px-6 pb-20 text-on-image md:items-center md:px-12 md:pb-0">
+              <div className="max-w-lg" aria-live="polite">
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em]">{activeBanner.eyebrow}</p>
+                <h2 className="mt-3 font-display text-5xl font-medium md:text-7xl">{activeBanner.title}</h2>
+                <p className="mt-4 max-w-sm text-sm leading-6 text-on-image/85 md:text-base">{activeBanner.copy}</p>
+                <a href="#colecoes" className="mt-7 inline-block border-b border-on-image pb-1 text-xs font-semibold uppercase transition-opacity hover:opacity-70">Descobrir</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute bottom-5 right-5 z-10 flex items-center gap-2 md:bottom-8 md:right-9">
+            <Button onClick={showPreviousBanner} variant="outline" size="icon" className="border-on-image/60 bg-primary/20 text-on-image backdrop-blur-sm hover:bg-on-image hover:text-primary" aria-label="Destaque anterior"><ChevronLeft /></Button>
+            <Button onClick={showNextBanner} variant="outline" size="icon" className="border-on-image/60 bg-primary/20 text-on-image backdrop-blur-sm hover:bg-on-image hover:text-primary" aria-label="Próximo destaque"><ChevronRight /></Button>
+          </div>
+          <div className="absolute bottom-7 left-6 z-10 flex gap-2 md:bottom-10 md:left-12" aria-label={`Destaque ${bannerSlide + 1} de ${bannerSlides.length}`}>
+            {bannerSlides.map((slide, index) => (
+              <button
+                key={slide.title}
+                type="button"
+                onClick={() => setBannerSlide(index)}
+                className={`h-px transition-all duration-300 ${index === bannerSlide ? "w-10 bg-on-image" : "w-5 bg-on-image/50"}`}
+                aria-label={`Mostrar ${slide.title}`}
+                aria-current={index === bannerSlide ? "true" : undefined}
+              />
+            ))}
           </div>
         </section>
 
