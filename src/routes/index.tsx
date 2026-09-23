@@ -3,6 +3,8 @@ import { ChevronLeft, ChevronRight, Heart, Menu, Search, ShoppingBag, UserRound,
 import { useEffect, useState } from "react";
 
 import heroImage from "@/assets/belluci-hero.jpg";
+import logoLight from "@/assets/belluci-logo-light.png";
+import logoDark from "@/assets/belluci-logo-dark.png";
 import bagImage from "@/assets/belluci-bags.jpg";
 import menImage from "@/assets/belluci-men.jpg";
 import objectsImage from "@/assets/belluci-objects.jpg";
@@ -64,7 +66,9 @@ function Index() {
             <span className="hidden text-xs font-medium uppercase md:inline">Pesquisar</span>
           </div>
 
-          <a href="#inicio" className="font-display text-lg font-semibold tracking-[0.12em] md:text-2xl" aria-label="BELLUCI D'ORO, início">BELLUCI D'ORO</a>
+          <a href="#inicio" className="flex items-center justify-center" aria-label="BELLUCI D'ORO, início">
+            <img src={logoLight} alt="BELLUCI D'ORO" className="h-8 w-auto object-contain md:h-11" />
+          </a>
 
           <div className="flex justify-end gap-1 md:gap-2">
             <Button variant="ghost" size="icon" className="hidden text-on-image hover:bg-on-image/10 hover:text-on-image sm:inline-flex" aria-label="Favoritos"><Heart /></Button>
@@ -105,8 +109,8 @@ function Index() {
           <div className="quiet-reveal relative h-full w-full overflow-y-auto bg-background p-8 text-foreground shadow-2xl sm:max-w-lg">
             <Button onClick={() => setMenuOpen(false)} variant="ghost" size="icon" className="absolute right-6 top-6" aria-label="Fechar menu"><X /></Button>
             <div className="border-b border-border pb-8">
-              <p className="font-display text-3xl font-medium">BELLUCI D'ORO</p>
-              <p className="mt-2 text-sm text-muted-foreground">Milano · Dal 1987</p>
+              <img src={logoDark} alt="BELLUCI D'ORO" className="h-9 w-auto object-contain" />
+              <p className="mt-3 text-sm text-muted-foreground">Milano · Dal 1987</p>
             </div>
             <nav className="mt-12 flex flex-col gap-6">
               {["Novidades", "Feminino", "Masculino", "Bolsas", "Sapatos", "Joalharia", "A Maison"].map((item, index) => (
@@ -220,8 +224,8 @@ function Index() {
       <footer className="bg-background px-6 py-12 md:px-9">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="font-display text-2xl font-semibold tracking-[0.1em]">BELLUCI D'ORO</p>
-            <p className="mt-2 text-xs text-muted-foreground">Milano · Luanda · Lisboa</p>
+            <img src={logoDark} alt="BELLUCI D'ORO" className="h-8 w-auto object-contain" />
+            <p className="mt-3 text-xs text-muted-foreground">Milano · Luanda · Lisboa</p>
           </div>
           <div className="flex flex-wrap gap-x-7 gap-y-3 text-xs">
             <a href="#inicio" className="hover:text-gold">A Maison</a><a href="#colecoes" className="hover:text-gold">Coleções</a><a href="mailto:concierge@bellucidoro.com" className="hover:text-gold">Concierge</a><a href="#inicio" className="hover:text-gold">Privacidade</a>
