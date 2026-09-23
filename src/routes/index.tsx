@@ -40,7 +40,7 @@ function Index() {
     { image: bagImage, alt: "Bolsa Bellissima em pele preta", eyebrow: "Ícone da Maison", title: "Bellissima", copy: "Linhas precisas, pele macia e ferragens douradas.", position: "object-center" },
     { image: menImage, alt: "Homem com alfaiataria preta da coleção La Notte", eyebrow: "Nova alfaiataria", title: "La Notte", copy: "A elegância italiana desenhada para depois do pôr do sol.", position: "object-[center_28%]" },
     { image: objectsImage, alt: "Sapatos, perfume e joia dourada BELLUCI D'ORO", eyebrow: "A arte do detalhe", title: "Objetos de desejo", copy: "Pequenos gestos, feitos para permanecer.", position: "object-center" },
-  ];
+  ] as const;
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -51,7 +51,7 @@ function Index() {
 
   const showPreviousBanner = () => setBannerSlide((current) => (current - 1 + bannerSlides.length) % bannerSlides.length);
   const showNextBanner = () => setBannerSlide((current) => (current + 1) % bannerSlides.length);
-  const activeBanner = bannerSlides[bannerSlide];
+  const activeBanner = bannerSlides[bannerSlide] ?? bannerSlides[0];
 
   return (
     <div className="min-h-screen bg-background text-foreground">
